@@ -1,0 +1,80 @@
+# GitOps Repository .gitignore
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Kubernetes secrets and sensitive data
+*-secret.yaml
+*-secret.yml
+*-secret.json
+secrets/
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# ArgoCD specific
+.argocd/
+argocd-cm.yaml
+argocd-rbac-cm.yaml
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# Terraform (if any)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Helm (if any)
+*.tgz
+charts/*.tgz
+
+# Logs
+logs/
+*.log
+
+# Node modules (if any)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python (if any)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/ 
