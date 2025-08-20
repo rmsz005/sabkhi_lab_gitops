@@ -7,9 +7,11 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://kyverno.github.io/policy-reporter
-    chart: policy-reporter
-    targetRevision: 2.*
+    repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
+    targetRevision: main
+    path: policy-reporter
+    helm:
+      dependencyUpdate: true
   destination:
     server: https://kubernetes.default.svc
     namespace: policy-reporter
