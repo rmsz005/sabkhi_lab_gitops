@@ -13,6 +13,8 @@ spec:
     targetRevision: main
     path: kyverno
     helm:
+      valueFiles:
+        - values.yaml
       dependencyUpdate: true
   destination:
     server: https://kubernetes.default.svc
