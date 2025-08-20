@@ -4,12 +4,16 @@ kind: Application
 metadata:
   name: kyverno
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   source:
     repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
     targetRevision: main
     path: kyverno
+    helm:
+      dependencyUpdate: true
   destination:
     server: https://kubernetes.default.svc
     namespace: kyverno

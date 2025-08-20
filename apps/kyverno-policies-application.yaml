@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: kyverno-policies
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
@@ -17,4 +19,6 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - SkipDryRunOnMissingResource=true
 
