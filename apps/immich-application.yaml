@@ -6,12 +6,17 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
-    targetRevision: main
-    path: immich
+  sources:
+  - repoURL: https://immich-app.github.io/immich-charts
+    targetRevision: 0.9.3
+    chart: immich
     helm:
       releaseName: immich
+      valueFiles:
+      - $values/immich-direct.yaml
+  - repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
+    targetRevision: main
+    ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: immich
