@@ -9,10 +9,10 @@ spec:
   source:
     repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
     targetRevision: main
-    path: .
+    path: immich_storage
     directory:
       recurse: false
-      include: "{immich-storage-classes.yaml,immich-persistent-storage.yaml,immich-postgresql.yaml}"
+      include: "{storage-classes.yaml,persistent-storage.yaml,postgresql.yaml}"
   destination:
     server: https://kubernetes.default.svc
     namespace: immich
