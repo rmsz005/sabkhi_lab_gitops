@@ -12,7 +12,7 @@ spec:
     path: immich_storage
     directory:
       recurse: false
-      include: "{storage-classes.yaml,persistent-storage.yaml,postgresql.yaml}"
+      include: "{storage-classes.yaml,persistent-storage.yaml,postgresql.yaml,hpa-config.yaml}"
   destination:
     server: https://kubernetes.default.svc
     namespace: immich
