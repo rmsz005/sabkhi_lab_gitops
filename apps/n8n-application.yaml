@@ -13,7 +13,7 @@ spec:
     helm:
       releaseName: n8n
       valueFiles:
-      - $values/n8n.yaml
+      - $values/n8n/values.yaml
   - repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
     targetRevision: main
     ref: values
