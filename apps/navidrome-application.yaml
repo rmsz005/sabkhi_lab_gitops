@@ -19,7 +19,7 @@ spec:
     ref: values
   destination:
     server: https://kubernetes.default.svc
-    namespace: navidrome
+    namespace: media  # Shared namespace with Spotizerr for music library PVC access
   syncPolicy:
     automated:
       prune: true
