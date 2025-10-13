@@ -22,7 +22,7 @@ spec:
     path: monitoring
     directory:
       recurse: false
-      include: '*-service.yaml'
+      include: '{*-service.yaml,servicemonitor-*.yaml}'
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
