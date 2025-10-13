@@ -17,6 +17,12 @@ spec:
   - repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
     targetRevision: main
     ref: values
+  - repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
+    targetRevision: main
+    path: monitoring
+    directory:
+      recurse: false
+      include: '*-service.yaml'
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
