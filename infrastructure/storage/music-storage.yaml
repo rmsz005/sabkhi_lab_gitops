@@ -1,0 +1,22 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: music-storage
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
+    targetRevision: main
+    path: infrastructure/storage/music-storage
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: media
+  syncPolicy:
+    automated:
+      prune: false  # Never auto-delete storage resources
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true  # Delete resources last to avoid data loss
