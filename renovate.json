@@ -1,0 +1,64 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":enablePreCommit"
+  ],
+  "timezone": "Europe/Paris",
+  "labels": ["dependencies", "renovate"],
+  "commitMessagePrefix": "chore(deps):",
+  "commitMessageAction": "update",
+  "rebaseWhen": "behind-base-branch",
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 0,
+  
+  "packageRules": [
+    {
+      "description": "Helm chart updates - ArgoCD Applications",
+      "matchManagers": ["regex"],
+      "matchFileNames": ["apps/**/*.yaml"],
+      "groupName": "helm-charts",
+      "separateMinorPatch": true,
+      "schedule": ["every weekend"]
+    },
+    {
+      "description": "Auto-merge patch updates",
+      "matchUpdateTypes": ["patch"],
+      "automerge": false,
+      "labels": ["dependencies", "renovate", "automerge"]
+    },
+    {
+      "description": "Group minor updates",
+      "matchUpdateTypes": ["minor"],
+      "groupName": "minor-updates",
+      "schedule": ["every weekend"]
+    },
+    {
+      "description": "Major updates require explicit review",
+      "matchUpdateTypes": ["major"],
+      "labels": ["dependencies", "renovate", "major-update"],
+      "reviewers": ["rmsz005"]
+    }
+  ],
+  
+  "regexManagers": [
+    {
+      "description": "Helm chart versions in ArgoCD Applications",
+      "fileMatch": ["^apps/.*\\.yaml$"],
+      "matchStrings": [
+        "repoURL:\\s+(?<registryUrl>https://[^\\s]+)\\s+targetRevision:\\s+(?<currentValue>[^\\s]+)\\s+chart:\\s+(?<depName>[^\\s]+)"
+      ],
+      "datasourceTemplate": "helm"
+    },
+    {
+      "description": "Container image tags in values references",
+      "fileMatch": ["^apps/.*\\.yaml$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+.*?:\\s*[\"']?(?<currentValue>.*?)[\"']?"
+      ]
+    }
+  ]
+}
+
