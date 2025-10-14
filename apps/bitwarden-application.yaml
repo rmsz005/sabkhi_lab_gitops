@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bitwarden
+  namespace: argocd
+spec:
+  project: default
+  sources:
+  - repoURL: https://charts.bitwarden.com/
+    targetRevision: 2025.9.2
+    chart: self-host
+    helm:
+      releaseName: bitwarden
+      valueFiles:
+      - $values/bitwarden/values.yaml
+  - repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
+    targetRevision: main
+    ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: bitwarden
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
