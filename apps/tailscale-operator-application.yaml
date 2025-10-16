@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tailscale-operator
+  namespace: argocd
+spec:
+  project: default
+  sources:
+  - repoURL: https://pkgs.tailscale.com/helmcharts
+    targetRevision: 1.88.4
+    chart: tailscale-operator
+    helm:
+      releaseName: tailscale-operator
+      valueFiles:
+      - $values/tailscale-operator/values.yaml
+  - repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
+    targetRevision: main
+    ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tailscale
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+
