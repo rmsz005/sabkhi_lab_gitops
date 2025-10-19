@@ -9,11 +9,16 @@ metadata:
 spec:
   project: default
   sources:
-  - repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
-    targetRevision: main
-    path: applications/security/bitwarden
+  - repoURL: https://charts.bitwarden.com/
+    chart: self-host
+    targetRevision: 2025.10.0
     helm:
       releaseName: bitwarden
+      valueFiles:
+      - $values/applications/security/bitwarden/values.yaml
+  - repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
+    targetRevision: main
+    ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: bitwarden
