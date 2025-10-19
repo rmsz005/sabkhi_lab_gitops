@@ -22,6 +22,14 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: bitwarden
+  # NOTE: This is a workaround for the initial installation.
+  # The pre-upgrade hook fails because it runs before the database is ready.
+  # REMOVE this block before performing a chart upgrade to allow migrations to run.
+  ignoreDifferences:
+  - group: batch
+    kind: Job
+    name: bitwarden-db-pre-upgrade
+    namespace: bitwarden
   syncPolicy:
     automated:
       prune: true
