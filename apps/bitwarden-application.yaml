@@ -8,7 +8,7 @@ spec:
   project: default
   sources:
   - repoURL: https://charts.bitwarden.com/
-    targetRevision: 0.7.0
+    targetRevision: 2025.10.0
     chart: self-host
     helm:
       releaseName: bitwarden
