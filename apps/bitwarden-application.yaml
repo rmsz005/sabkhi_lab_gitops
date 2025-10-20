@@ -22,10 +22,6 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: bitwarden
-  ignoreDifferences:
-  - group: batch
-    kind: Job
-    name: bitwarden-db-pre-upgrade
   syncPolicy:
     automated:
       prune: true
