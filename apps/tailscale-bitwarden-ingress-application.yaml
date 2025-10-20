@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
     targetRevision: main
-    path: tailscale-operator
+    path: tailscale-operator/bitwarden-ts-ingress.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: bitwarden
