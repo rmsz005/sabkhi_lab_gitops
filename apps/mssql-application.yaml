@@ -2,30 +2,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bitwarden
+  name: mssql
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   project: default
   sources:
-  - repoURL: https://charts.bitwarden.com/
-    chart: self-host
-    targetRevision: 2025.10.0
+  - repoURL: https://microsoft.github.io/mssql-server-samples/
+    chart: mssql
+    targetRevision: 0.5.0
     helm:
-      releaseName: bitwarden
+      releaseName: mssql
       valueFiles:
-      - $values/applications/security/bitwarden/values.yaml
+      - $values/applications/databases/mssql/values.yaml
   - repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
     targetRevision: main
     ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: bitwarden
-  ignoreDifferences:
-  - group: batch
-    kind: Job
-    name: bitwarden-db-pre-upgrade
   syncPolicy:
     automated:
       prune: true
@@ -33,11 +29,9 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-      - RespectIgnoreDifferences=true
     retry:
       limit: 5
       backoff:
         duration: 5s
         factor: 2
         maxDuration: 3m
-
