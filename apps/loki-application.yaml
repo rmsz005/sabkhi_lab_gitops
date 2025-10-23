@@ -22,8 +22,15 @@ spec:
     namespace: monitoring
   syncPolicy:
     automated:
-      prune: true
+      prune: false  # StatefulSet with PVC - don't auto-delete
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+  ignoreDifferences:
+    - group: ""
+      kind: PersistentVolumeClaim
+      jsonPointers:
+        - /status
+        - /spec/volumeName
+        - /metadata/finalizers

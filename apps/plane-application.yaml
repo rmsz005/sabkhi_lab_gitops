@@ -22,7 +22,7 @@ spec:
     namespace: plane
   syncPolicy:
     automated:
-      prune: true
+      prune: false  # Has StatefulSets with PVCs - don't auto-delete
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
@@ -32,3 +32,9 @@ spec:
     kind: Job
     jsonPointers:
     - /spec/template/metadata/annotations/timestamp
+  - group: ""
+    kind: PersistentVolumeClaim
+    jsonPointers:
+    - /status
+    - /spec/volumeName
+    - /metadata/finalizers

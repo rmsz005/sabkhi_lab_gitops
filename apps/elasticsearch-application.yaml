@@ -22,9 +22,16 @@ spec:
     namespace: elasticsearch
   syncPolicy:
     automated:
-      prune: true
+      prune: false  # ECK operator creates PVCs - don't auto-delete
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+  ignoreDifferences:
+    - group: ""
+      kind: PersistentVolumeClaim
+      jsonPointers:
+        - /status
+        - /spec/volumeName
+        - /metadata/finalizers
 
