@@ -15,8 +15,17 @@ spec:
     namespace: media
   syncPolicy:
     automated:
-      prune: false  # Never auto-delete storage resources
+      prune: false  # NEVER delete PVCs
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - PruneLast=true  # Delete resources last to avoid data loss
+      - PruneLast=true
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: ""
+      kind: PersistentVolumeClaim
+      jsonPointers:
+        - /status
+        - /spec/volumeName
+        - /metadata/finalizers

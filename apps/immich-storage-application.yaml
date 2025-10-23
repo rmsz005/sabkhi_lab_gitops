@@ -18,7 +18,17 @@ spec:
     namespace: immich
   syncPolicy:
     automated:
-      prune: true
+      prune: false  # NEVER delete PVCs
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - PruneLast=true
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: ""
+      kind: PersistentVolumeClaim
+      jsonPointers:
+        - /status
+        - /spec/volumeName
+        - /metadata/finalizers
