@@ -22,7 +22,16 @@ spec:
     namespace: n8n
   syncPolicy:
     automated:
-      prune: true
+      prune: false  # Don't prune - has PVC
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: ""
+      kind: PersistentVolumeClaim
+      jsonPointers:
+        - /status
+        - /spec/volumeName
+        - /metadata/finalizers
