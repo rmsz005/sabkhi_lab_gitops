@@ -2,20 +2,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: longhorn-recurring-jobs
+  name: longhorn-manifests
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
     targetRevision: main
-    path: .
+    path: longhorn
     directory:
       recurse: false
-      include: 'longhorn-recurring-jobs.yaml'
+      include: "*.yaml"
+      exclude: "Chart.yaml"
   destination:
     server: https://kubernetes.default.svc
-    namespace: longhorn
   syncPolicy:
     automated:
       prune: true

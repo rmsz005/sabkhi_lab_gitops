@@ -20,4 +20,13 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - PruneLast=true  # Delete resources last to avoid data loss
+      - ServerSideApply=true  # Safe merge of PVC annotations
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: ""
+      kind: PersistentVolumeClaim
+      jsonPointers:
+        - /status
+        - /spec/volumeName
+        - /metadata/finalizers
 
