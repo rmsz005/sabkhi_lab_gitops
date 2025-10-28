@@ -22,4 +22,14 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
+  ignoreDifferences:
+  - group: ""
+    kind: Secret
+    jsonPointers:
+    - /data  # May be managed by external controllers
+  - group: ""
+    kind: ServiceAccount
+    jsonPointers:
+    - /secrets  # Auto-generated token secrets
+    - /imagePullSecrets  # May be auto-added
 
