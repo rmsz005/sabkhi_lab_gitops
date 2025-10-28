@@ -34,4 +34,8 @@ spec:
         - /status
         - /spec/volumeName
         - /metadata/finalizers
+    - group: apps
+      kind: StatefulSet
+      jsonPointers:
+        - /spec/volumeClaimTemplates  # Immutable field
 

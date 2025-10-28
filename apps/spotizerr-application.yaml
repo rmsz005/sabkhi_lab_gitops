@@ -27,4 +27,10 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+  ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    jsonPointers:
+    - /metadata/annotations/deployment.kubernetes.io~1revision
+    - /metadata/annotations/kubectl.kubernetes.io~1last-applied-configuration
 
