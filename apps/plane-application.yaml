@@ -43,4 +43,3 @@ spec:
     jsonPointers:
     - /metadata/annotations/deployment.kubernetes.io~1revision
     - /spec/template/metadata/annotations/timestamp
-    - /spec/template/spec/containers/0/resources/limits  # Chart doesn't support removing limits
