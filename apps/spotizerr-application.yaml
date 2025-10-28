@@ -33,4 +33,6 @@ spec:
     jsonPointers:
     - /metadata/annotations/deployment.kubernetes.io~1revision
     - /metadata/annotations/kubectl.kubernetes.io~1last-applied-configuration
+    - /spec/template/spec/containers/0/resources/limits/cpu  # K8s normalizes 1000m to "1"
+    - /spec/template/spec/securityContext/fsGroup  # May differ between template renders
 
