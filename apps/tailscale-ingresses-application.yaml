@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tailscale-navidrome-ingress
+  name: tailscale-ingresses
   namespace: argocd
 spec:
   project: default
@@ -10,11 +10,15 @@ spec:
     repoURL: https://github.com/rmsz005/sabkhi_lab_values.git
     targetRevision: main
     path: tailscale-operator
+    directory:
+      recurse: false
+      include: "*-ts-ingress.yaml"
   destination:
     server: https://kubernetes.default.svc
-    namespace: media
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
 
